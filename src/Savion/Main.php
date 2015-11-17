@@ -75,8 +75,27 @@ class Main extends PluginBase implements Listener
 		public function onCommand(CommandSender $sender, Command $command, $label, array $args)
 	        {
 		if(strtolower($command->getName()) === "setgame"){
-		if(!$this->config->exists("game1")){
+			
+		if(!$this->config->exists("game1") !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
 		$this->setGame1($sender);
+		$sender->sendMessage("Please tap a sign!"); 
+		return true;
+		}
+		
+		if(!$this->config->exists("game2") && $this->config->exists("game1")){
+		$this->setGame2($sender);
+		$sender->sendMessage("Please tap a sign!"); 
+		return true;
+		}
+		
+		if(!$this->config->exists("game3") && $this->config->exists("game2") && $this->config->exists("game1")){
+		$this->setGame3($sender);
+		$sender->sendMessage("Please tap a sign!"); 
+		return true;
+		}
+		
+		if(!$this->config->exists("game4") && $this->config->exists("game2") && $this->config->exists("game3") && $this->config->exists("game1")){
+		$this->setGame4($sender);
 		$sender->sendMessage("Please tap a sign!"); 
 		return true;
 		}
@@ -84,6 +103,8 @@ class Main extends PluginBase implements Listener
 		}
 		
 		}
+		
+		
 		
 		public function onInteract(PlayerInteractEvent $ev){
 		$p = $ev->getPlayer();
