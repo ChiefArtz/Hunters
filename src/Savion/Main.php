@@ -1,5 +1,5 @@
 <?php
-   /*                _       _________ _______  _______  _______ 
+        /*   _       _________ _______  _______  _______ 
 |\     /||\     /|( (    /|\__   __/(  ____ \(  ____ )(  ____ \
 | )   ( || )   ( ||  \  ( |   ) (   | (    \/| (    )|| (    \/
 | (___) || |   | ||   \ | |   | |   | (__    | (____)|| (_____ 
@@ -61,6 +61,8 @@ class Main extends PluginBase implements Listener
 
 	    public function onEnable()
 	    {
+	    	@mkdir($this->getDataFolder());
+		$this->config=new Config($this->getDataFolder() . "config.yml", Config::YAML, array());
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);	
 		$this->getServer()->getLogger()->info("[Hunters]Loaded!");
 		}
@@ -79,12 +81,12 @@ class Main extends PluginBase implements Listener
 		
 		public function onInteract(PlayerInteractEvent $ev){
 		$p = $ev->getPlayer();
-		
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
 		if(in_array($this->setGame1,$p->getName()){
-		//todo
 		switch($this->Setter[$p->getName()]){
 		case 0:
-			if($event->getBlock()->getID() != 63 && $event->getBlock()->getID() != 68)
+			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68)
 				{
 					return;
 				}
@@ -92,7 +94,9 @@ class Main extends PluginBase implements Listener
 					"x" =>$block->getX(),
 					"y" =>$block->getY(),
 					"z" =>$block->getZ(),
-					"level" =>$levelname);
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
 				$this->config->set("sign",$this->sign);
 				$this->config->save();
 				break;
@@ -102,13 +106,101 @@ class Main extends PluginBase implements Listener
 					"x" =>$block->x,
 					"y" =>$block->y,
 					"z" =>$block->z,
-					"level" =>$levelname);
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
 				$this->config->set("pos1",$this->pos1);
+				$this->config->save();
+				break;
+				
+				case 2:
+				$this->pos2=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos2",$this->pos2);
+				$this->config->save();
+				break;
+				
+				case 3:
+				$this->pos3=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos3",$this->pos3);
+				$this->config->save();
+				break;
+				
+				case 4:
+				$this->pos4=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos4",$this->pos4);
+				$this->config->save();
+				break;
+				
+				case 5:
+				$this->pos5=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos5",$this->pos5);
+				$this->config->save();
+				break;
+				
+				case 6:
+				$this->pos6=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos6",$this->pos6);
+				$this->config->save();
+				break;
+				
+				case 7:
+				$this->pos7=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos7",$this->pos7);
+				$this->config->save();
+				break;
+				
+				case 8:
+				$this->pos8=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("pos8",$this->pos5);
 				$this->config->save();
 				break;
 		
 		}
 		
+		}else{
+			//todo
 		}
 		}
 		
