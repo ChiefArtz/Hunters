@@ -102,19 +102,23 @@ class Main extends PluginBase implements Listener
 		}
 		
 		public function setGame1(Player $p){
-		$this->setGame1 = array("Player" => $p->getName());		
+		$this->setGame1 = array("Player" => $p->getName());
+		$this->Setter[$p->getName()]=0;
 		}
 		
 		public function setGame2(Player $p){
-		$this->setGame2 = array("Player" => $p->getName());		
+		$this->setGame2 = array("Player" => $p->getName());
+		$this->Setter[$p->getName()]=0;
 		}
 		
 		public function setGame3(Player $p){
-		$this->setGame3 = array("Player" => $p->getName());		
+		$this->setGame3 = array("Player" => $p->getName());	
+		$this->Setter[$p->getName()]=0;
 		}
 		
 		public function setGame4(Player $p){
-		$this->setGame4 = array("Player" => $p->getName());		
+		$this->setGame4 = array("Player" => $p->getName());
+		$this->Setter[$p->getName()]=0;
 		}	
 		
 		}
