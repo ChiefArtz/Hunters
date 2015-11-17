@@ -38,6 +38,13 @@ public $setGame2 = array();
 public $setGame3 = array();
 public $setGame4 = array();
 
+public $Setter = array();
+
+public $players1 = array();
+public $players2 = array();
+public $players3 = array();
+public $players4 = array();
+
 class Main extends PluginBase implements Listener
 {
 
@@ -64,10 +71,36 @@ class Main extends PluginBase implements Listener
 		
 		if(in_array($this->setGame1,$p->getName()){
 		//todo
+		switch($this->Setter[$p->getName()]){
+		case 0:
+			if($event->getBlock()->getID() != 63 && $event->getBlock()->getID() != 68)
+				{
+					return;
+				}
+	                	$this->sign=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname);
+				$this->config->set("sign",$this->sign);
+				$this->config->save();
+				break;
+				
+				case 1:
+				$this->pos1=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname);
+				$this->config->set("pos1",$this->pos1);
+				$this->config->save();
+				break;
 		
 		}
 		
 		}
+		}
+		
 		public function setGame1(Player $p){
 		$this->setGame1 = array("Player" => $p->getName());		
 		}
