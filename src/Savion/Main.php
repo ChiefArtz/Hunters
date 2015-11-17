@@ -51,10 +51,15 @@ public $setGame4 = array();
 
 public $Setter = array();
 
-public $players1 = array();
-public $players2 = array();
-public $players3 = array();
-public $players4 = array();
+public $players1 = array(); //game1 players
+public $players2 = array(); //game2 players
+public $players3 = array(); //game3 players
+public $players4 = array(); //game4 players
+
+public $status1 = array();
+public $status2 = array();
+public $status3 = array();
+public $status4 = array();
 
 class Main extends PluginBase implements Listener
 {
@@ -83,7 +88,8 @@ class Main extends PluginBase implements Listener
 		$p = $ev->getPlayer();
 		$block = $ev->getBlock();
 		$levelname = $p->getLevel()->getName();
-		if(in_array($this->setGame1,$p->getName()){
+		if(isset($this->setGame1[$p->getName()])){
+	
 		switch($this->Setter[$p->getName()]){
 		case 0:
 			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68)
@@ -200,28 +206,48 @@ class Main extends PluginBase implements Listener
 		}
 		
 		}else{
-			//todo
+		
 		}
 		}
 		
 		public function setGame1(Player $p){
-		$this->setGame1 = array("Player" => $p->getName());
+	        $this->setGame1[$p->getName()] = array("Player" => $p->getName());
 		$this->Setter[$p->getName()]=0;
 		}
 		
 		public function setGame2(Player $p){
-		$this->setGame2 = array("Player" => $p->getName());
+        	$this->setGame2[$p->getName()] = array("Player" => $p->getName());
 		$this->Setter[$p->getName()]=0;
 		}
 		
 		public function setGame3(Player $p){
-		$this->setGame3 = array("Player" => $p->getName());	
+		$this->setGame3[$p->getName()] = array("Player" => $p->getName());	
 		$this->Setter[$p->getName()]=0;
 		}
 		
 		public function setGame4(Player $p){
-		$this->setGame4 = array("Player" => $p->getName());
+		$this->setGame4[$p->getName()] = array("Player" => $p->getName());
 		$this->Setter[$p->getName()]=0;
 		}	
+		
+	public function addGamePlayer1(Player $p){
+		$this->players1[$p->getName()] = array("Player" => $p->getName());
+	}
+	
+	public function addGamePlayer2(Player $p){
+		$this->players2[$p->getName()] = array("Player" => $p->getName());
+	}
+	
+	public function addGamePlayer3(Player $p){
+		$this->players3[$p->getName()] = array("Player" => $p->getName());
+	}
+	
+	public function addGamePlayer4(Player $p){
+		$this->players4[$p->getName()] = array("Player" => $p->getName());
+	}
+	
+	public function addGamePlayer5(Player $p){
+		$this->players5[$p->getName()] = array("Player" => $p->getName());
+	}
 		
 		}
