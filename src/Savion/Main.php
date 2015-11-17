@@ -192,8 +192,8 @@ class Main extends PluginBase implements Listener
 					"z" =>$block->z,
 					"level" =>$levelname,
 					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos8",$this->pos5);
+					unset($this->Setter[$p->getName()]);
+				$this->config->set("pos8",$this->pos8);
 				$this->config->save();
 				break;
 		
