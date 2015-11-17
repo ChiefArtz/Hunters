@@ -73,11 +73,12 @@ class Main extends PluginBase implements Listener
 		}
 		
 		public function onCommand(CommandSender $sender, Command $command, $label, array $args)
-	    {
+	        {
 		if(strtolower($command->getName()) === "setgame"){
 		if(!$this->config->exists("game1")){
 		$this->setGame1($sender);
 		$sender->sendMessage("Please tap a sign!"); 
+		return true;
 		}
 		
 		}
