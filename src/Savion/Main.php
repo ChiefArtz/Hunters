@@ -30,6 +30,9 @@ use pocketmine\tile\Tile;
 use pocketmine\level\Position;
 use pocketmine\level\Level;
 
+use pocketmine\event\player\PlayerInteractEvent;
+
+
 public $setGame1 = array();
 public $setGame2 = array();
 public $setGame3 = array();
@@ -41,6 +44,7 @@ class Main extends PluginBase implements Listener
 	    public function onEnable()
 	    {
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);	
+		$this->getServer()->getLogger()->info("[Hunters]Loaded!");
 		}
 		
 		public function onCommand(CommandSender $sender, Command $command, $label, array $args)
@@ -55,6 +59,15 @@ class Main extends PluginBase implements Listener
 		
 		}
 		
+		public function onInteract(PlayerInteractEvent $ev){
+		$p = $ev->getPlayer();
+		
+		if(in_array($this->setGame1,$p->getName()){
+		//todo
+		
+		}
+		
+		}
 		public function setGame1(Player $p){
 		$this->setGame1 = array("Player" => $p->getName());		
 		}
