@@ -165,6 +165,93 @@ public $time4 = 0;
 	}
 }
 
+public function room2(PlayerInteractEvent $ev){
+		$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setRoom2[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 152){
+				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+					return;
+				}
+				
+					$this->waitroom=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"waitroom");
+						unset($this->Setter[$p->getName()]);
+				unset($this->setRoom1[$p->getName()]);
+				$this->config->set("[game2]wairoom",$this->waitroom);
+				$this->config->save();
+				$p->sendMessage("waitroom created!");
+				break;
+		}
+	}
+}
+
+public function room3(PlayerInteractEvent $ev){
+		$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setRoom3[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 152){
+				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+					return;
+				}
+				
+					$this->waitroom=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"waitroom");
+						unset($this->Setter[$p->getName()]);
+				unset($this->setRoom3[$p->getName()]);
+				$this->config->set("[game3]wairoom",$this->waitroom);
+				$this->config->save();
+				$p->sendMessage("waitroom created!");
+				break;
+		}
+	}
+}
+
+public function room4(PlayerInteractEvent $ev){
+		$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setRoom4[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 152){
+				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+					return;
+				}
+				
+					$this->waitroom=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"waitroom");
+						unset($this->Setter[$p->getName()]);
+				unset($this->setRoom4[$p->getName()]);
+				$this->config->set("[game4]wairoom",$this->waitroom);
+				$this->config->save();
+				$p->sendMessage("waitroom created!");
+				break;
+		}
+	}
+}
+
 public function setGame4(PlayerInteractEvent $ev){
          	$p = $ev->getPlayer();
 		$block = $ev->getBlock();
@@ -215,7 +302,7 @@ public function setGame4(PlayerInteractEvent $ev){
 				unset($this->pos1);
 				unset($this->pos2);
 				unset($this->Setter[$p->getName()]);
-				unset($this->setGame1[$p->getName()]);
+				unset($this->setGame4[$p->getName()]);
 				$this->config->save();
 				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
 				break;
@@ -296,7 +383,7 @@ public function setGame3(PlayerInteractEvent $ev){
 				unset($this->pos1);
 				unset($this->pos2);
 				unset($this->Setter[$p->getName()]);
-				unset($this->setGame1[$p->getName()]);
+				unset($this->setGame3[$p->getName()]);
 				$this->config->save();
 				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
 				break;
@@ -378,7 +465,7 @@ public function setGame2(PlayerInteractEvent $ev){
 				unset($this->pos1);
 				unset($this->pos2);
 				unset($this->Setter[$p->getName()]);
-				unset($this->setGame1[$p->getName()]);
+				unset($this->setGame2[$p->getName()]);
 				$this->config->save();
 				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
 				break;
