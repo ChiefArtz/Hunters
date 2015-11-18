@@ -76,7 +76,8 @@ public $status4 = array();
 		
 		public function onCommand(CommandSender $sender, Command $command, $label, array $args)
 	        {
-		if(strtolower($command->getName()) === "setgame"){
+		switch($command->getName()){
+			case "setgame":
 			
 		if(!$this->config->exists("game1") !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
 		$this->setGame1($sender);
@@ -107,6 +108,7 @@ public $status4 = array();
    		$sender->sendMessage("Max game count has already been set!");
 		return false;
 		}
+		break;
 		
 		}
 	        }
@@ -120,6 +122,7 @@ public $status4 = array();
 		if(isset($this->setGame1[$p->getName()])){
 		switch($this->Setter[$p->getName()]){
 		case 0:
+		
 			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
 				$sender->sendMessage("please tap a SIGN!");
 					return;
@@ -230,8 +233,5 @@ public $status4 = array();
 		$this->players4[$p->getName()] = array("Player" => $p->getName());
 	}
 	
-	public function addGamePlayer5(Player $p){
-		$this->players5[$p->getName()] = array("Player" => $p->getName());
-	}
 		
 }
