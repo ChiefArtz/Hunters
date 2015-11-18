@@ -11,6 +11,5 @@
 #PLEASE TEST YOUR WORK BEFORE MAKING A PULL REQUEST!!
 
 ##|Version|Stable|
-##|----|-------|
 ##|1.0_BETA|no?|
 
