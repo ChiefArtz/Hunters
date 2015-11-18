@@ -65,6 +65,7 @@ public $status1 = array();
 public $status2 = array();
 public $status3 = array();
 public $status4 = array();
+
 	       public function onEnable()
 	       {
 	    	@mkdir($this->getDataFolder());
@@ -117,7 +118,6 @@ public $status4 = array();
 		$block = $ev->getBlock();
 		$levelname = $p->getLevel()->getName();
 		if(isset($this->setGame1[$p->getName()])){
-	
 		switch($this->Setter[$p->getName()]){
 		case 0:
 			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
@@ -132,123 +132,56 @@ public $status4 = array();
 					"level" =>$levelname,
 					"game1");
 					$this->Setter[$p->getName()]++;
-				$this->config->set("sign",$this->sign);
+				$this->config->set("[game1]sign",$this->sign);
 				$this->config->save();
 				break;
 				
-				case 1:
+				/*Hunters spot*/ case 1:
 				$this->pos1=array(
 					"x" =>$block->x,
 					"y" =>$block->y,
 					"z" =>$block->z,
 					"level" =>$levelname,
-					"game1");
-					
-					$this->game1=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
+					"pos1");
 					$this->Setter[$p->getName()]++;
 				$this->config->set("pos1",$this->pos1);
-				$this->config->set("game1",$this->game1);
 				$this->config->save();
 				break;
 				
-				case 2:
+				/*Hunters spot*/case 2:
 				$this->pos2=array(
 					"x" =>$block->x,
 					"y" =>$block->y,
 					"z" =>$block->z,
 					"level" =>$levelname,
-					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos2",$this->pos2);
+					"pos2");
+				$this->config->set("[game1]pos2",$this->pos2);
+				$this->config->set("game1",$this->pos1);
+				$this->config->set("game1",$this->pos2);
+				unset($this->pos1);
+				unset($this->pos2);
+				unset($this->Setter[$p->getName()]);
 				$this->config->save();
 				break;
 				
-				case 3:
-				$this->pos3=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos3",$this->pos3);
-				$this->config->save();
-				break;
 				
-				case 4:
-				$this->pos4=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos4",$this->pos4);
-				$this->config->save();
-				break;
-				
-				case 5:
-				$this->pos5=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos5",$this->pos5);
-				$this->config->save();
-				break;
-				
-				case 6:
-				$this->pos6=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos6",$this->pos6);
-				$this->config->save();
-				break;
-				
-				case 7:
-				$this->pos7=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
-					$this->Setter[$p->getName()]++;
-				$this->config->set("pos7",$this->pos7);
-				$this->config->save();
-				break;
-				
-				case 8:
-				$this->pos8=array(
-					"x" =>$block->x,
-					"y" =>$block->y,
-					"z" =>$block->z,
-					"level" =>$levelname,
-					"game1");
-					unset($this->Setter[$p->getName()]);
-				$this->config->set("pos8",$this->pos8);
-				$this->config->save();
-				break;
 		
 		}
 		
 		}else{
+			
 		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($sign === $this->config->get("sign") && $sign === $this->config->get("sign")["game1"] && !isset($this->players1[$p->getName()])){
+/* will this work? */if($sign === $this->config->get("[game1]sign") && !isset($this->players1[$p->getName()])){
 		$this->addGamePlayer1($p);
-		$p->setLevel($this->getServer()->getLevelByName($this->config->get("game1")["level"]));
-		$p->teleport($this->config->get("game1"));
-		$p->sendMessage("Joining!");
+		if(!$this->config->exists("[game1]waitroom"){
+		$p->sendMessage("Waitroom isnt setup!");
+		$ev->setCancelled();
+		return;
+		}
+		
+		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game1]waitroom")["level"]));
+		$p->teleport($this->config->get("[game1]waitroom"));
+		
 		foreach($this->players1 as $pl){
 		$pl->sendMessage($p->getName()." Joined the match!");
 		
@@ -263,22 +196,22 @@ public $status4 = array();
 		
 		public function setGame1(Player $p){
 	        $this->setGame1[$p->getName()] = array("Player" => $p->getName());
-		$this->Setter[$p->getName()]=0;
+		$this->Setter[$p->getName()] = 0;
 		}
 		
 		public function setGame2(Player $p){
         	$this->setGame2[$p->getName()] = array("Player" => $p->getName());
-		$this->Setter[$p->getName()]=0;
+		$this->Setter[$p->getName()] = 0;
 		}
 		
 		public function setGame3(Player $p){
 		$this->setGame3[$p->getName()] = array("Player" => $p->getName());	
-		$this->Setter[$p->getName()]=0;
+		$this->Setter[$p->getName()] = 0;
 		}
 		
 		public function setGame4(Player $p){
 		$this->setGame4[$p->getName()] = array("Player" => $p->getName());
-		$this->Setter[$p->getName()]=0;
+		$this->Setter[$p->getName()] = 0;
 		}	
 		
 	public function addGamePlayer1(Player $p){
