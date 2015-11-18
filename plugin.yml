@@ -8,4 +8,3 @@ commands:
  setgame:
   permission: hunters.command.setgame
   description: Hunters game setting command
-  usage: /setgame
