@@ -76,7 +76,13 @@ public $status4 = array();
 		
 		public function onCommand(CommandSender $sender, Command $command, $label, array $args)
 	        {
-		switch($command->getName()){
+		if(!isset($args[0])){
+			unset($sender,$cmd,$label,$args);
+			return false;
+			
+		}
+		switch ($args[0])
+		{
 			case "setgame":
 			$sender->sendMessage("test");
 		if(!$this->config->exists("game1") !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
