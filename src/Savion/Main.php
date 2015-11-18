@@ -130,7 +130,39 @@ public $time4 = 0;
 		return false;
 		}
 		break;
-		//todo: command for setting rooms
+		
+		
+		case "setroom":
+		if(!$this->config->exists("[game1]waitroom") && !$this->config->exists("[game4]waitroom") && !$this->config->exists("[game2]waitroom") && !$this->config->exists("[game3]waitroom")){
+		 $this->setRoom1($sender);
+		$sender->sendMessage("Please tap a redstone block!"); 
+		return true;
+		}
+		
+		if(!$this->config->exists("game2") && $this->config->exists("game1")){
+		$this->setRoom2($sender);
+		$sender->sendMessage("Please tap a redstone block!"); 
+		return true;
+		}
+		
+		if(!$this->config->exists("[game3]waitroom") && $this->config->exists("[game2]waitroom") && $this->config->exists("[game1]waitroom")){
+		$this->setRoom3($sender);
+	    $sender->sendMessage("Please tap a redstone block!"); 
+		return true;
+		}
+		
+		if(!$this->config->exists("[game4]waitroom") && $this->config->exists("[game2]waitroom") && $this->config->exists("[game3]waitroom") && $this->config->exists("[game1]waitroom")){
+		$this->setRoom4($sender);
+		$sender->sendMessage("Please tap a redstone block!"); 
+		return true;
+		}
+		
+		if($this->config->exists("[game1]waitroom") && $this->config->exists("[game2]waitroom") && $this->config->exists("[game3]waitroom") && $this->config->exists("[game1]waitroom")){
+			
+   		$sender->sendMessage("Max waitrooms have been set!");
+		return false;
+		}
+		break;
 		}
 	        }
 		
