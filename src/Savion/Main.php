@@ -243,8 +243,8 @@ public $status4 = array();
 		}
 		
 		}else{
-		$sign = $p->getLevel()->getTile($event->getBlock());
-/* will this work */if($sign === $this->config->get("sign") && $sign === $this->config->get("sign")["game1"]){
+		$sign = $p->getLevel()->getTile($block);
+/* will this work? */if($sign === $this->config->get("sign") && $sign === $this->config->get("sign")["game1"] && !isset($this->players1[$p->getName()])){
 		$this->addGamePlayer1($p);
 		$p->setLevel($this->getServer()->getLevelByName($this->config->get("game1")["level"]));
 		$p->teleport($this->config->get("game1"));
