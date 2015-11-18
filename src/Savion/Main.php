@@ -127,7 +127,7 @@ public $status4 = array();
 		$p = $ev->getPlayer();
 		$block = $ev->getBlock();
 		$levelname = $p->getLevel()->getName();
-		if(isset($this->setGame1[$p->getName()])){
+		if(isset($this->setGame1[$p->getName()]) && $p->isOp() === true){
 		switch($this->Setter[$p->getName()]){
 		case 0:
 		
@@ -184,7 +184,7 @@ public $status4 = array();
 		}else{
 			
 		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($sign === $this->config->get("[game1]sign") && !isset($this->players1[$p->getName()])){
+/* will this work? */if($sign !isset($this->players1[$p->getName()])){
 		$this->addGamePlayer1($p);
 		if(!$this->config->exists("[game1]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
