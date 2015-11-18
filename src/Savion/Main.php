@@ -323,7 +323,7 @@ public function setGame4(PlayerInteractEvent $ev){
 		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game4]waitroom")["level"]));
 		$p->teleport($this->config->get("[game4]waitroom"));
 		
-		foreach($this->players2 as $pl){
+		foreach($this->players4 as $pl){
 		$pl->sendMessage($p->getName()." Joined the match!");
 		
 		}
@@ -404,7 +404,7 @@ public function setGame3(PlayerInteractEvent $ev){
 		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game3]waitroom")["level"]));
 		$p->teleport($this->config->get("[game3]waitroom"));
 		
-		foreach($this->players2 as $pl){
+		foreach($this->players3 as $pl){
 		$pl->sendMessage($p->getName()." Joined the match!");
 		
 		}
