@@ -69,7 +69,7 @@ public $status4 = array();
 	       public function onEnable()
 	       {
 	    	@mkdir($this->getDataFolder());
-		$this->config=new Config($this->getDataFolder() . "config.yml", Config::YAML, array());
+		$this->config=new Config($this->getDataFolder() . "config.yml", Config::YAML, array("Test" => "Test"));
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);	
 		$this->getServer()->getLogger()->info("[Hunters]Loaded!");
 		}
@@ -78,7 +78,7 @@ public $status4 = array();
 	        {
 		switch($command->getName()){
 			case "setgame":
-			
+			$sender->sendMessage("test");
 		if(!$this->config->exists("game1") !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
 		$this->setGame1($sender);
 		$sender->sendMessage("Please tap a sign!"); 
