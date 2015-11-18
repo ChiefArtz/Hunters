@@ -13,6 +13,7 @@
 
 namespace Savion;
 
+use pocketmine\utils\Config;
 use pocketmine\Player;
 use pocketmine\Server;
 
@@ -80,31 +81,32 @@ public $status4 = array();
 			unset($sender,$cmd,$label,$args);
 			return false;
 			
-		}
+		};
 		switch ($args[0])
 		{
 			case "setgame":
-			$sender->sendMessage("test");
-		if(!$this->config->exists("game1") !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
-		$this->setGame1($sender);
-		$sender->sendMessage("Please tap a sign!"); 
+		//	$sender->sendMessage("test");
+	if(!$this->config->exists("game1") && !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
+	
+		 $this->set1($sender);
+		$sender->sendMessage("Please tap a sign!");
 		return true;
 		}
 		
 		if(!$this->config->exists("game2") && $this->config->exists("game1")){
-		$this->setGame2($sender);
+		$this->set2($sender);
 		$sender->sendMessage("Please tap a sign!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("game3") && $this->config->exists("game2") && $this->config->exists("game1")){
-		$this->setGame3($sender);
+		$this->set3($sender);
 		$sender->sendMessage("Please tap a sign!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("game4") && $this->config->exists("game2") && $this->config->exists("game3") && $this->config->exists("game1")){
-		$this->setGame4($sender);
+		$this->set4($sender);
 		$sender->sendMessage("Please tap a sign!"); 
 		return true;
 		}
@@ -130,7 +132,7 @@ public $status4 = array();
 		case 0:
 		
 			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
-				$sender->sendMessage("please tap a SIGN!");
+				$p->sendMessage("please tap a SIGN!"); 
 					return;
 				}
 				
@@ -139,22 +141,24 @@ public $status4 = array();
 					"y" =>$block->getY(),
 					"z" =>$block->getZ(),
 					"level" =>$levelname,
-					"game1");
+					"sign");
 					$this->Setter[$p->getName()]++;
 				$this->config->set("[game1]sign",$this->sign);
 				$this->config->save();
+				$p->sendMessage("sign created!");
 				break;
 				
 				/*Hunters spot*/ case 1:
 				$this->pos1=array(
 					"x" =>$block->x,
-					"y" =>$block->y,
+					"y" =>$block->y, 
 					"z" =>$block->z,
 					"level" =>$levelname,
 					"pos1");
 					$this->Setter[$p->getName()]++;
 				$this->config->set("pos1",$this->pos1);
 				$this->config->save();
+				$p->sendMessage("pos1 created!");
 				break;
 				
 				/*Hunters spot*/case 2:
@@ -163,14 +167,14 @@ public $status4 = array();
 					"y" =>$block->y,
 					"z" =>$block->z,
 					"level" =>$levelname,
-					"pos2");
+					"pos2"); 
 				$this->config->set("[game1]pos2",$this->pos2);
-				$this->config->set("game1",$this->pos1);
-				$this->config->set("game1",$this->pos2);
+				$this->config->set("game1","true");
 				unset($this->pos1);
 				unset($this->pos2);
 				unset($this->Setter[$p->getName()]);
 				$this->config->save();
+				$p->sendMessage("pos2 created! everything setup");
 				break;
 				
 				
@@ -182,7 +186,7 @@ public $status4 = array();
 		$sign = $p->getLevel()->getTile($block);
 /* will this work? */if($sign === $this->config->get("[game1]sign") && !isset($this->players1[$p->getName()])){
 		$this->addGamePlayer1($p);
-		if(!$this->config->exists("[game1]waitroom"){
+		if(!$this->config->exists("[game1]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
 		$ev->setCancelled();
 		return;
@@ -203,22 +207,22 @@ public $status4 = array();
 		
 		//add kills?
 		
-		public function setGame1(Player $p){
+		public function set1(Player $p){ 
 	        $this->setGame1[$p->getName()] = array("Player" => $p->getName());
 		$this->Setter[$p->getName()] = 0;
 		}
 		
-		public function setGame2(Player $p){
+		public function set2(Player $p){
         	$this->setGame2[$p->getName()] = array("Player" => $p->getName());
 		$this->Setter[$p->getName()] = 0;
 		}
 		
-		public function setGame3(Player $p){
+		public function set3(Player $p){
 		$this->setGame3[$p->getName()] = array("Player" => $p->getName());	
 		$this->Setter[$p->getName()] = 0;
 		}
 		
-		public function setGame4(Player $p){
+		public function set4(Player $p){
 		$this->setGame4[$p->getName()] = array("Player" => $p->getName());
 		$this->Setter[$p->getName()] = 0;
 		}	
