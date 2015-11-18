@@ -1,6 +1,6 @@
-
-A Pocketmine-MP minigame!
-#########################
+############################
+##A Pocketmine-MP minigame!
+############################
 # A minigame where 7 players hunt a special person
 ##TODO:
 #-Get commands and game setting ready[25% done]
