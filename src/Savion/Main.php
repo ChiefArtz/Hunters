@@ -82,7 +82,8 @@ public $time4 = 0;
 	       public function onEnable()
 	       {
 	    	@mkdir($this->getDataFolder());
-		$this->config=new Config($this->getDataFolder() . "config.yml", Config::YAML, array("Test" => "Test"));
+		$this->config=new Config($this->getDataFolder() . "config.yml", Config::YAML, array());
+		$this->config->save();
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);	
 		$this->getServer()->getLogger()->info("[Hunters]Loaded!");
 		}
@@ -163,6 +164,252 @@ public $time4 = 0;
 		}
 	}
 }
+
+public function setGame4(PlayerInteractEvent $ev){
+         	$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setGame4[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
+				$p->sendMessage("please tap a SIGN!"); 
+					return;
+				}
+				
+	                	$this->sign=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"sign");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("[game4]sign",$this->sign);
+				$this->config->save();
+				$p->sendMessage("sign created!");
+				break;
+				
+				/*Hunters spot*/ case 1:
+				$this->pos1=array(
+					"x" =>$block->x,
+					"y" =>$block->y, 
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"pos1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("[game4]pos1",$this->pos1);
+				$this->config->save();
+				$p->sendMessage("pos1 created!");
+				break;
+				
+				/*Hunters spot*/case 2:
+				$this->pos2=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"pos2"); 
+				$this->config->set("[game4]pos2",$this->pos2);
+				$this->config->set("game4","true");
+				unset($this->pos1);
+				unset($this->pos2);
+				unset($this->Setter[$p->getName()]);
+				unset($this->setGame1[$p->getName()]);
+				$this->config->save();
+				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
+				break;
+				
+		}
+		
+		}else{
+			
+		$sign = $p->getLevel()->getTile($block);
+/* will this work? */if($sign->getX() === $this->config->get("[game4]sign")["x"] && $sign->getY() === $this->config->get("[game4]sign")["y"] && $sign->getZ() === $this->config->get("[game4]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game4]sign")["level"] && $this->config->exists("game4") && !isset($this->players4[$p->getName()])){
+		$this->addGamePlayer4($p);
+		if(!$this->config->exists("[game4]waitroom")){
+		$p->sendMessage("Waitroom isnt setup!");
+		$ev->setCancelled();
+		return;
+		}
+		
+		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game4]waitroom")["level"]));
+		$p->teleport($this->config->get("[game4]waitroom"));
+		
+		foreach($this->players2 as $pl){
+		$pl->sendMessage($p->getName()." Joined the match!");
+		
+		}
+		//more todo
+		}
+		}
+		
+		}
+
+public function setGame3(PlayerInteractEvent $ev){
+         	$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setGame3[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
+				$p->sendMessage("please tap a SIGN!"); 
+					return;
+				}
+				
+	                	$this->sign=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"sign");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("[game3]sign",$this->sign);
+				$this->config->save();
+				$p->sendMessage("sign created!");
+				break;
+				
+				/*Hunters spot*/ case 1:
+				$this->pos1=array(
+					"x" =>$block->x,
+					"y" =>$block->y, 
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"pos1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("[game3]pos1",$this->pos1);
+				$this->config->save();
+				$p->sendMessage("pos1 created!");
+				break;
+				
+				/*Hunters spot*/case 2:
+				$this->pos2=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"pos2"); 
+				$this->config->set("[game3]pos2",$this->pos2);
+				$this->config->set("game3","true");
+				unset($this->pos1);
+				unset($this->pos2);
+				unset($this->Setter[$p->getName()]);
+				unset($this->setGame1[$p->getName()]);
+				$this->config->save();
+				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
+				break;
+				
+		}
+		
+		}else{
+			
+		$sign = $p->getLevel()->getTile($block);
+/* will this work? */if($sign->getX() === $this->config->get("[game3]sign")["x"] && $sign->getY() === $this->config->get("[game3]sign")["y"] && $sign->getZ() === $this->config->get("[game3]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game3]sign")["level"] && $this->config->exists("game3") && !isset($this->players3[$p->getName()])){
+		$this->addGamePlayer3($p);
+		if(!$this->config->exists("[game3]waitroom")){
+		$p->sendMessage("Waitroom isnt setup!");
+		$ev->setCancelled();
+		return;
+		}
+		
+		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game3]waitroom")["level"]));
+		$p->teleport($this->config->get("[game3]waitroom"));
+		
+		foreach($this->players2 as $pl){
+		$pl->sendMessage($p->getName()." Joined the match!");
+		
+		}
+		//more todo
+		}
+		}
+		
+		}
+
+
+public function setGame2(PlayerInteractEvent $ev){
+         	$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setGame2[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
+				$p->sendMessage("please tap a SIGN!"); 
+					return;
+				}
+				
+	                	$this->sign=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"sign");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("[game2]sign",$this->sign);
+				$this->config->save();
+				$p->sendMessage("sign created!");
+				break;
+				
+				/*Hunters spot*/ case 1:
+				$this->pos1=array(
+					"x" =>$block->x,
+					"y" =>$block->y, 
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"pos1");
+					$this->Setter[$p->getName()]++;
+				$this->config->set("[game2]pos1",$this->pos1);
+				$this->config->save();
+				$p->sendMessage("pos1 created!");
+				break;
+				
+				/*Hunters spot*/case 2:
+				$this->pos2=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"pos2"); 
+				$this->config->set("[game2]pos2",$this->pos2);
+				$this->config->set("game2","true");
+				unset($this->pos1);
+				unset($this->pos2);
+				unset($this->Setter[$p->getName()]);
+				unset($this->setGame1[$p->getName()]);
+				$this->config->save();
+				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
+				break;
+				
+		}
+		
+		}else{
+			
+		$sign = $p->getLevel()->getTile($block);
+/* will this work? */if($sign->getX() === $this->config->get("[game2]sign")["x"] && $sign->getY() === $this->config->get("[game2]sign")["y"] && $sign->getZ() === $this->config->get("[game2]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game2]sign")["level"] && $this->config->exists("game2") && !isset($this->players2[$p->getName()])){
+		$this->addGamePlayer2($p);
+		if(!$this->config->exists("[game2]waitroom")){
+		$p->sendMessage("Waitroom isnt setup!");
+		$ev->setCancelled();
+		return;
+		}
+		
+		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game2]waitroom")["level"]));
+		$p->teleport($this->config->get("[game2]waitroom"));
+		
+		foreach($this->players2 as $pl){
+		$pl->sendMessage($p->getName()." Joined the match!");
+		
+		}
+		//more todo
+		}
+		}
+		
+		}
+		
+		
 		public function setGame1(PlayerInteractEvent $ev){
          	$p = $ev->getPlayer();
 		$block = $ev->getBlock();
@@ -196,7 +443,7 @@ public $time4 = 0;
 					"level" =>$levelname,
 					"pos1");
 					$this->Setter[$p->getName()]++;
-				$this->config->set("pos1",$this->pos1);
+				$this->config->set("[game1]pos1",$this->pos1);
 				$this->config->save();
 				$p->sendMessage("pos1 created!");
 				break;
@@ -312,4 +559,20 @@ public $time4 = 0;
 	}
 	
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public function game1(){
+			//todo
+		}
 }
