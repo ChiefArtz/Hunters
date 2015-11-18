@@ -14,6 +14,7 @@
 namespace Savion;
 
 use pocketmine\utils\Config;
+
 use pocketmine\Player;
 use pocketmine\Server;
 
@@ -184,7 +185,7 @@ public $status4 = array();
 		}else{
 			
 		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($sign !isset($this->players1[$p->getName()])){
+/* will this work? */if($sign->getX() === $this->config->get("[game1]sign")["x"] && $sign->getY() === $this->config->get("[game1]sign")["y"] && $sign->getZ() === $this->config->get("[game1]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game1]sign")["level"] && $this->config->exists("game1") && !isset($this->players1[$p->getName()])){
 		$this->addGamePlayer1($p);
 		if(!$this->config->exists("[game1]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
