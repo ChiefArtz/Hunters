@@ -44,6 +44,11 @@ use pocketmine\level\Level;
 use pocketmine\event\player\PlayerInteractEvent;
 
 
+
+
+class Main extends PluginBase implements Listener
+{
+
 public $setGame1 = array();
 public $setGame2 = array();
 public $setGame3 = array();
@@ -60,12 +65,8 @@ public $status1 = array();
 public $status2 = array();
 public $status3 = array();
 public $status4 = array();
-
-class Main extends PluginBase implements Listener
-{
-
-	    public function onEnable()
-	    {
+	       public function onEnable()
+	       {
 	    	@mkdir($this->getDataFolder());
 		$this->config=new Config($this->getDataFolder() . "config.yml", Config::YAML, array());
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);	
@@ -100,13 +101,18 @@ class Main extends PluginBase implements Listener
 		return true;
 		}
 		
+		if($this->config->exists("game4") && $this->config->exists("game2") && $this->config->exists("game3") && $this->config->exists("game1")){
+			
+   		$sender->sendMessage("Max game count has already been set!");
+		return false;
 		}
 		
 		}
+	        }
 		
+		//add gametask
 		
-		
-		public function onInteract(PlayerInteractEvent $ev){
+		public function setGame1(PlayerInteractEvent $ev){
 		$p = $ev->getPlayer();
 		$block = $ev->getBlock();
 		$levelname = $p->getLevel()->getName();
@@ -114,10 +120,11 @@ class Main extends PluginBase implements Listener
 	
 		switch($this->Setter[$p->getName()]){
 		case 0:
-			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68)
-				{
+			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
+				$sender->sendMessage("please tap a SIGN!");
 					return;
 				}
+				
 	                	$this->sign=array(
 					"x" =>$block->getX(),
 					"y" =>$block->getY(),
@@ -136,8 +143,16 @@ class Main extends PluginBase implements Listener
 					"z" =>$block->z,
 					"level" =>$levelname,
 					"game1");
+					
+					$this->game1=array(
+					"x" =>$block->x,
+					"y" =>$block->y,
+					"z" =>$block->z,
+					"level" =>$levelname,
+					"game1");
 					$this->Setter[$p->getName()]++;
 				$this->config->set("pos1",$this->pos1);
+				$this->config->set("game1",$this->game1);
 				$this->config->save();
 				break;
 				
@@ -228,9 +243,23 @@ class Main extends PluginBase implements Listener
 		}
 		
 		}else{
+		$sign = $p->getLevel()->getTile($event->getBlock());
+/* will this work */if($sign === $this->config->get("sign") && $sign === $this->config->get("sign")["game1"]){
+		$this->addGamePlayer1($p);
+		$p->setLevel($this->getServer()->getLevelByName($this->config->get("game1")["level"]));
+		$p->teleport($this->config->get("game1"));
+		$p->sendMessage("Joining!");
+		foreach($this->players1 as $pl){
+		$pl->sendMessage($p->getName()." Joined the match!");
 		
 		}
+		//more todo
 		}
+		}
+		
+		}
+		
+		//add kills?
 		
 		public function setGame1(Player $p){
 	        $this->setGame1[$p->getName()] = array("Player" => $p->getName());
@@ -272,4 +301,4 @@ class Main extends PluginBase implements Listener
 		$this->players5[$p->getName()] = array("Player" => $p->getName());
 	}
 		
-		}
+}
