@@ -14,6 +14,7 @@
 namespace Savion;
 
 use pocketmine\utils\Config;
+use pocketmine\utils\TextFormat;
 
 use pocketmine\Player;
 use pocketmine\Server;
@@ -98,35 +99,35 @@ public $time4 = 0;
 		switch ($args[0])
 		{
 			case "setgame":
-		//	$sender->sendMessage("test");
+		//	$sender->sendMessage(TextFormat::GREEN."test");
 	if(!$this->config->exists("game1") && !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
 	
 		 $this->set1($sender);
-		$sender->sendMessage("Please tap a sign!");
+		$sender->sendMessage(TextFormat::RED."Please tap a sign!");
 		return true;
 		}
 		
 		if(!$this->config->exists("game2") && $this->config->exists("game1")){
 		$this->set2($sender);
-		$sender->sendMessage("Please tap a sign!"); 
+		$sender->sendMessage(TextFormat::RED."Please tap a sign!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("game3") && $this->config->exists("game2") && $this->config->exists("game1")){
 		$this->set3($sender);
-		$sender->sendMessage("Please tap a sign!"); 
+		$sender->sendMessage(TextFormat::RED."Please tap a sign!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("game4") && $this->config->exists("game2") && $this->config->exists("game3") && $this->config->exists("game1")){
 		$this->set4($sender);
-		$sender->sendMessage("Please tap a sign!"); 
+		$sender->sendMessage(TextFormat::RED."Please tap a sign!"); 
 		return true;
 		}
 		
 		if($this->config->exists("game4") && $this->config->exists("game2") && $this->config->exists("game3") && $this->config->exists("game1")){
 			
-   		$sender->sendMessage("Max game count has already been set!");
+   		$sender->sendMessage(TextFormat::GREEN."Max game count has already been set!");
 		return false;
 		}
 		break;
@@ -135,31 +136,31 @@ public $time4 = 0;
 		case "setroom":
 		if(!$this->config->exists("[game1]waitroom") && !$this->config->exists("[game4]waitroom") && !$this->config->exists("[game2]waitroom") && !$this->config->exists("[game3]waitroom")){
 		 $this->setRoom1($sender);
-		$sender->sendMessage("Please tap a redstone block!"); 
+		$sender->sendMessage(TextFormat::RED."Please tap a redstone block!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("game2") && $this->config->exists("game1")){
 		$this->setRoom2($sender);
-		$sender->sendMessage("Please tap a redstone block!"); 
+		$sender->sendMessage(TextFormat::RED."Please tap a redstone block!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("[game3]waitroom") && $this->config->exists("[game2]waitroom") && $this->config->exists("[game1]waitroom")){
 		$this->setRoom3($sender);
-	    $sender->sendMessage("Please tap a redstone block!"); 
+	        $sender->sendMessage(TextFormat::RED."Please tap a redstone block!"); 
 		return true;
 		}
 		
 		if(!$this->config->exists("[game4]waitroom") && $this->config->exists("[game2]waitroom") && $this->config->exists("[game3]waitroom") && $this->config->exists("[game1]waitroom")){
 		$this->setRoom4($sender);
-		$sender->sendMessage("Please tap a redstone block!"); 
+		$sender->sendMessage(TextFormat::RED."Please tap a redstone block!"); 
 		return true;
 		}
 		
 		if($this->config->exists("[game1]waitroom") && $this->config->exists("[game2]waitroom") && $this->config->exists("[game3]waitroom") && $this->config->exists("[game1]waitroom")){
 			
-   		$sender->sendMessage("Max waitrooms have been set!");
+   		$sender->sendMessage(TextFormat::GREEN."Max waitrooms have been set!");
 		return false;
 		}
 		break;
@@ -175,9 +176,9 @@ public $time4 = 0;
 		if(isset($this->setRoom1[$p->getName()]) && $p->isOp() === true){
 		switch($this->Setter[$p->getName()]){
 		case 0:
-		
+		        // Got lazy putting down TextFormat blah blah... -CavinMiana
 			if($ev->getBlock()->getID() != 152){
-				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+				$p->sendMessage("§4Please tap a REDSTONE BLOCK!");
 					return;
 				}
 				
@@ -189,9 +190,9 @@ public $time4 = 0;
 					"waitroom");
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom1[$p->getName()]);
-				$this->config->set("[game1]wairoom",$this->waitroom);
+				$this->config->set("[game1]waitroom",$this->waitroom);
 				$this->config->save();
-				$p->sendMessage("waitroom created!");
+				$p->sendMessage("§2Waitroom created!");
 				break;
 		}
 	}
@@ -206,7 +207,7 @@ public function room2(PlayerInteractEvent $ev){
 		case 0:
 		
 			if($ev->getBlock()->getID() != 152){
-				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+				$p->sendMessage("§4Please tap a REDSTONE BLOCK!"); 
 					return;
 				}
 				
@@ -220,7 +221,7 @@ public function room2(PlayerInteractEvent $ev){
 				unset($this->setRoom1[$p->getName()]);
 				$this->config->set("[game2]wairoom",$this->waitroom);
 				$this->config->save();
-				$p->sendMessage("waitroom created!");
+				$p->sendMessage("§2Waitroom created!");
 				break;
 		}
 	}
@@ -235,7 +236,7 @@ public function room3(PlayerInteractEvent $ev){
 		case 0:
 		
 			if($ev->getBlock()->getID() != 152){
-				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+				$p->sendMessage("§4Please tap a REDSTONE BLOCK!"); 
 					return;
 				}
 				
@@ -249,7 +250,7 @@ public function room3(PlayerInteractEvent $ev){
 				unset($this->setRoom3[$p->getName()]);
 				$this->config->set("[game3]wairoom",$this->waitroom);
 				$this->config->save();
-				$p->sendMessage("waitroom created!");
+				$p->sendMessage("§2Waitroom created!");
 				break;
 		}
 	}
@@ -264,7 +265,7 @@ public function room4(PlayerInteractEvent $ev){
 		case 0:
 		
 			if($ev->getBlock()->getID() != 152){
-				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+				$p->sendMessage("§4Please tap a REDSTONE BLOCK!"); 
 					return;
 				}
 				
@@ -278,7 +279,7 @@ public function room4(PlayerInteractEvent $ev){
 				unset($this->setRoom4[$p->getName()]);
 				$this->config->set("[game4]wairoom",$this->waitroom);
 				$this->config->save();
-				$p->sendMessage("waitroom created!");
+				$p->sendMessage("§2Waitroom created!");
 				break;
 		}
 	}
@@ -293,7 +294,7 @@ public function setGame4(PlayerInteractEvent $ev){
 		case 0:
 		
 			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
-				$p->sendMessage("please tap a SIGN!"); 
+				$p->sendMessage("§4Please tap a SIGN!"); 
 					return;
 				}
 				
@@ -306,7 +307,7 @@ public function setGame4(PlayerInteractEvent $ev){
 					$this->Setter[$p->getName()]++;
 				$this->config->set("[game4]sign",$this->sign);
 				$this->config->save();
-				$p->sendMessage("sign created!");
+				$p->sendMessage("§2Sign created!");
 				break;
 				
 				/*Hunters spot*/ case 1:
@@ -319,7 +320,7 @@ public function setGame4(PlayerInteractEvent $ev){
 					$this->Setter[$p->getName()]++;
 				$this->config->set("[game4]pos1",$this->pos1);
 				$this->config->save();
-				$p->sendMessage("pos1 created!");
+				$p->sendMessage("§2Pos1 created!");
 				break;
 				
 				/*Hunters spot*/case 2:
@@ -336,7 +337,7 @@ public function setGame4(PlayerInteractEvent $ev){
 				unset($this->Setter[$p->getName()]);
 				unset($this->setGame4[$p->getName()]);
 				$this->config->save();
-				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
+				$p->sendMessage("§2Pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
 				break;
 				
 		}
@@ -347,7 +348,7 @@ public function setGame4(PlayerInteractEvent $ev){
 /* will this work? */if($sign->getX() === $this->config->get("[game4]sign")["x"] && $sign->getY() === $this->config->get("[game4]sign")["y"] && $sign->getZ() === $this->config->get("[game4]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game4]sign")["level"] && $this->config->exists("game4") && !isset($this->players4[$p->getName()])){
 		$this->addGamePlayer4($p);
 		if(!$this->config->exists("[game4]waitroom")){
-		$p->sendMessage("Waitroom isnt setup!");
+		$p->sendMessage("§4Waitroom isnt setup!");
 		$ev->setCancelled();
 		return;
 		}
@@ -356,7 +357,7 @@ public function setGame4(PlayerInteractEvent $ev){
 		$p->teleport($this->config->get("[game4]waitroom"));
 		
 		foreach($this->players4 as $pl){
-		$pl->sendMessage($p->getName()." Joined the match!");
+		$pl->sendMessage($p->getName()."§2 Joined the match!");
 		
 		}
 		//more todo
@@ -374,7 +375,7 @@ public function setGame3(PlayerInteractEvent $ev){
 		case 0:
 		
 			if($ev->getBlock()->getID() != 63 && $ev->getBlock()->getID() != 68){
-				$p->sendMessage("please tap a SIGN!"); 
+				$p->sendMessage("§4Please tap a SIGN!"); 
 					return;
 				}
 				
@@ -387,7 +388,7 @@ public function setGame3(PlayerInteractEvent $ev){
 					$this->Setter[$p->getName()]++;
 				$this->config->set("[game3]sign",$this->sign);
 				$this->config->save();
-				$p->sendMessage("sign created!");
+				$p->sendMessage("§2Sign created!");
 				break;
 				
 				/*Hunters spot*/ case 1:
@@ -400,7 +401,7 @@ public function setGame3(PlayerInteractEvent $ev){
 					$this->Setter[$p->getName()]++;
 				$this->config->set("[game3]pos1",$this->pos1);
 				$this->config->save();
-				$p->sendMessage("pos1 created!");
+				$p->sendMessage("§2Pos1 created!");
 				break;
 				
 				/*Hunters spot*/case 2:
@@ -417,8 +418,10 @@ public function setGame3(PlayerInteractEvent $ev){
 				unset($this->Setter[$p->getName()]);
 				unset($this->setGame3[$p->getName()]);
 				$this->config->save();
-				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
+				$p->sendMessage("§2Pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
 				break;
+                                // Stopped right here with the Color Format stuff. I will continue tommorow or tonight -CavinMiana
+                                // Fixed Capitalization, Spelling, and added Color. -CavinMiana.
 				
 		}
 		
