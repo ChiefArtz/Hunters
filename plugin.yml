@@ -8,4 +8,4 @@ commands:
  h:
   permission: hunters.command.hunters
   description: hunters command
-  usage: /h <setgame|remove>
+  usage: /h <setgame|setroom>
