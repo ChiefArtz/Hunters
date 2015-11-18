@@ -10,6 +10,6 @@
 ##Want to help out? Please do so by forking this repo and make a pull request! :+1:
 #PLEASE TEST YOUR WORK BEFORE MAKING A PULL REQUEST!!
 
-##|Version|Stable|
-##|1.0_BETA|no?|
+##|:Version:|:Stable:|
+##|:1.0_BETA:|:no?:|
 
