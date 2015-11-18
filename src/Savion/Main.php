@@ -99,7 +99,7 @@ public $time4 = 0;
 		switch ($args[0])
 		{
 			case "setgame":
-		//	$sender->sendMessage("I LOVE BANANAS!!!");
+		//	$sender->sendMessage(TextFormat::GREEN."test");
 	if(!$this->config->exists("game1") && !$this->config->exists("game4") && !$this->config->exists("game2") && !$this->config->exists("game3")){
 	
 		 $this->set1($sender);
