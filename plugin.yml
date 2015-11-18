@@ -5,6 +5,7 @@ api: [1.12.0]
 load: POSTWORLD
 author: SavionLegendZzz
 commands:
- setgame:
-  permission: hunters.command.setgame
-  description: Hunters game setting command
+ h:
+  permission: hunters.command.hunters
+  description: hunters command
+  usage: /h <setgame|remove>
