@@ -56,6 +56,11 @@ public $setGame2 = array();
 public $setGame3 = array();
 public $setGame4 = array();
 
+public $setRoom1 = array();
+public $setRoom2 = array();
+public $setRoom3 = array();
+public $setRoom4 = array();
+
 public $Setter = array();
 
 public $players1 = array(); //game1 players
@@ -63,10 +68,16 @@ public $players2 = array(); //game2 players
 public $players3 = array(); //game3 players
 public $players4 = array(); //game4 players
 
-public $status1 = array();
-public $status2 = array();
-public $status3 = array();
-public $status4 = array();
+public $status1 = 0;
+public $status2 = 0;
+public $status3 = 0;
+public $status4 = 0;
+
+public $time1 = 0;
+public $time2 = 0;
+public $time3 = 0;
+public $time4 = 0;
+
 
 	       public function onEnable()
 	       {
@@ -118,14 +129,42 @@ public $status4 = array();
 		return false;
 		}
 		break;
-		
+		//todo: command for setting rooms
 		}
 	        }
 		
 		//add gametask
 		
-		public function setGame1(PlayerInteractEvent $ev){
+		public function room1(PlayerInteractEvent $ev){
 		$p = $ev->getPlayer();
+		$block = $ev->getBlock();
+		$levelname = $p->getLevel()->getName();
+		if(isset($this->setRoom1[$p->getName()]) && $p->isOp() === true){
+		switch($this->Setter[$p->getName()]){
+		case 0:
+		
+			if($ev->getBlock()->getID() != 152){
+				$p->sendMessage("please tap a REDSTONE BLOCK!"); 
+					return;
+				}
+				
+					$this->waitroom=array(
+					"x" =>$block->getX(),
+					"y" =>$block->getY(),
+					"z" =>$block->getZ(),
+					"level" =>$levelname,
+					"waitroom");
+						unset($this->Setter[$p->getName()]);
+				unset($this->setRoom1[$p->getName()]);
+				$this->config->set("[game1]wairoom",$this->waitroom);
+				$this->config->save();
+				$p->sendMessage("waitroom created!");
+				break;
+		}
+	}
+}
+		public function setGame1(PlayerInteractEvent $ev){
+         	$p = $ev->getPlayer();
 		$block = $ev->getBlock();
 		$levelname = $p->getLevel()->getName();
 		if(isset($this->setGame1[$p->getName()]) && $p->isOp() === true){
@@ -174,8 +213,9 @@ public $status4 = array();
 				unset($this->pos1);
 				unset($this->pos2);
 				unset($this->Setter[$p->getName()]);
+				unset($this->setGame1[$p->getName()]);
 				$this->config->save();
-				$p->sendMessage("pos2 created! everything setup");
+				$p->sendMessage("pos2 created! everything setup(reminder: remember todo /h setroom to set the waitroom");
 				break;
 				
 				
@@ -207,6 +247,33 @@ public $status4 = array();
 		}
 		
 		//add kills?
+		public function setRoom1(Player $p){ 
+				unset($this->Setter[$p->getName()]);
+				unset($this->setRoom1[$p->getName()]);
+	        $this->setRoom1[$p->getName()] = array("Player" => $p->getName());
+		$this->Setter[$p->getName()] = 0;
+		}
+		
+		public function setRoom2(Player $p){ 
+				unset($this->Setter[$p->getName()]);
+				unset($this->setRoom2[$p->getName()]);
+	        $this->setRoom2[$p->getName()] = array("Player" => $p->getName());
+		$this->Setter[$p->getName()] = 0;
+		}
+		
+		public function setRoom3(Player $p){ 
+				unset($this->Setter[$p->getName()]);
+				unset($this->setRoom3[$p->getName()]);
+	        $this->setRoom3[$p->getName()] = array("Player" => $p->getName());
+		$this->Setter[$p->getName()] = 0;
+		}
+		
+		public function setRoom4(Player $p){ 
+				unset($this->Setter[$p->getName()]);
+				unset($this->setRoom4[$p->getName()]);
+	        $this->setRoom4[$p->getName()] = array("Player" => $p->getName());
+		$this->Setter[$p->getName()] = 0;
+		}
 		
 		public function set1(Player $p){ 
 	        $this->setGame1[$p->getName()] = array("Player" => $p->getName());
