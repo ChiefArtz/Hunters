@@ -219,7 +219,7 @@ public function room2(PlayerInteractEvent $ev){
 					"waitroom");
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom1[$p->getName()]);
-				$this->config->set("[game2]wairoom",$this->waitroom);
+				$this->config->set("[game2]waitroom",$this->waitroom);
 				$this->config->save();
 				$p->sendMessage("§2Waitroom created!");
 				break;
@@ -248,7 +248,7 @@ public function room3(PlayerInteractEvent $ev){
 					"waitroom");
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom3[$p->getName()]);
-				$this->config->set("[game3]wairoom",$this->waitroom);
+				$this->config->set("[game3]waitroom",$this->waitroom);
 				$this->config->save();
 				$p->sendMessage("§2Waitroom created!");
 				break;
@@ -277,7 +277,7 @@ public function room4(PlayerInteractEvent $ev){
 					"waitroom");
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom4[$p->getName()]);
-				$this->config->set("[game4]wairoom",$this->waitroom);
+				$this->config->set("[game4]waitroom",$this->waitroom);
 				$this->config->save();
 				$p->sendMessage("§2Waitroom created!");
 				break;
