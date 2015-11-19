@@ -186,8 +186,8 @@ public $time4 = 0;
 					"x" =>$block->getX(),
 					"y" =>$block->getY(),
 					"z" =>$block->getZ(),
-					"level" =>$levelname,
-					"waitroom");
+					"level" =>$levelname);
+					
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom1[$p->getName()]);
 				$this->config->set("[game1]waitroom",$this->waitroom);
@@ -215,8 +215,7 @@ public function room2(PlayerInteractEvent $ev){
 					"x" =>$block->getX(),
 					"y" =>$block->getY(),
 					"z" =>$block->getZ(),
-					"level" =>$levelname,
-					"waitroom");
+					"level" =>$levelname);
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom1[$p->getName()]);
 				$this->config->set("[game2]waitroom",$this->waitroom);
@@ -244,8 +243,7 @@ public function room3(PlayerInteractEvent $ev){
 					"x" =>$block->getX(),
 					"y" =>$block->getY(),
 					"z" =>$block->getZ(),
-					"level" =>$levelname,
-					"waitroom");
+					"level" =>$levelname);
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom3[$p->getName()]);
 				$this->config->set("[game3]waitroom",$this->waitroom);
@@ -273,8 +271,7 @@ public function room4(PlayerInteractEvent $ev){
 					"x" =>$block->getX(),
 					"y" =>$block->getY(),
 					"z" =>$block->getZ(),
-					"level" =>$levelname,
-					"waitroom");
+					"level" =>$levelname);
 						unset($this->Setter[$p->getName()]);
 				unset($this->setRoom4[$p->getName()]);
 				$this->config->set("[game4]waitroom",$this->waitroom);
