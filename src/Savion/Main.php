@@ -349,7 +349,6 @@ $sign = $p->getLevel()->getTile($block);
 		$this->addGamePlayer4($p);
 		if(!$this->config->exists("[game4]waitroom")){
 		$p->sendMessage("§4Waitroom isnt setup!");
-		$ev->setCancelled();
 		return;
 		}
 		
@@ -432,7 +431,6 @@ public function setGame3(PlayerInteractEvent $ev){
 		$this->addGamePlayer3($p);
 		if(!$this->config->exists("[game3]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
-		$ev->setCancelled();
 		return;
 		}
 		
@@ -514,7 +512,6 @@ $sign = $p->getLevel()->getTile($block);
 		$this->addGamePlayer2($p);
 		if(!$this->config->exists("[game2]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
-		$ev->setCancelled();
 		return;
 		}
 		
@@ -598,7 +595,6 @@ $sign = $p->getLevel()->getTile($block);
 		$this->addGamePlayer1($p);
 		if(!$this->config->exists("[game1]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
-		$ev->setCancelled();
 		return;
 		}
 		
