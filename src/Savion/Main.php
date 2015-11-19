@@ -596,8 +596,8 @@ $sign = $p->getLevel()->getTile($block);
 		}
 		
 		$p->setLevel($this->getServer()->getLevelByName($this->config->get("[game1]waitroom")["level"]));
-		$p->teleport($this->config->get("[game1]waitroom"));
-		
+		$p->teleport(//todo);
+		 
 		foreach($this->players1 as $pl){
 		$pl->sendMessage($p->getName()." Joined the match!");
 		
