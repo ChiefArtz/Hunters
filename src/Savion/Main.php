@@ -569,7 +569,7 @@ $sign = $p->getLevel()->getTile($block);
 					"x" =>$block->x,
 					"y" =>$block->y,
 					"z" =>$block->z,
-					"level" =>$levelname,
+					"level" =>$levelName,
 					"pos2"); 
 				$this->config->set("[game1]pos2",$this->pos2);
 				$this->config->set("game1","true");
