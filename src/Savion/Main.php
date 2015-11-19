@@ -344,8 +344,8 @@ public function setGame4(PlayerInteractEvent $ev){
 		
 		}else{
 			
-		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($this->config->exists("[game4]sign") && $sign->getX() === $this->config->get("[game4]sign")["x"] && $sign->getY() === $this->config->get("[game4]sign")["y"] && $sign->getZ() === $this->config->get("[game4]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game4]sign")["level"] && $this->config->exists("game4") && !isset($this->players4[$p->getName()])){
+		$sign = $p->getLevel()->getBlock();
+/* will this work? */if($sign instanceof Vector3 && $this->config->exists("[game4]sign") && $sign->getX() === $this->config->get("[game4]sign")["x"] && $sign->getY() === $this->config->get("[game4]sign")["y"] && $sign->getZ() === $this->config->get("[game4]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game4]sign")["level"] && $this->config->exists("game4") && !isset($this->players4[$p->getName()])){
 		$this->addGamePlayer4($p);
 		if(!$this->config->exists("[game4]waitroom")){
 		$p->sendMessage("§4Waitroom isnt setup!");
@@ -427,8 +427,8 @@ public function setGame3(PlayerInteractEvent $ev){
 		
 		}else{
 			
-		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($this->config->exists("[game3]sign") && $sign->getX() === $this->config->get("[game3]sign")["x"] && $sign->getY() === $this->config->get("[game3]sign")["y"] && $sign->getZ() === $this->config->get("[game3]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game3]sign")["level"] && $this->config->exists("game3") && !isset($this->players3[$p->getName()])){
+		$sign = $p->getLevel()->getBlock();
+/* will this work? */if($sign instanceof Vector3 && $this->config->exists("[game3]sign") && $sign->getX() === $this->config->get("[game3]sign")["x"] && $sign->getY() === $this->config->get("[game3]sign")["y"] && $sign->getZ() === $this->config->get("[game3]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game3]sign")["level"] && $this->config->exists("game3") && !isset($this->players3[$p->getName()])){
 		$this->addGamePlayer3($p);
 		if(!$this->config->exists("[game3]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
@@ -509,8 +509,8 @@ public function setGame2(PlayerInteractEvent $ev){
 		
 		}else{
 			
-		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($this->config->exists("[game2]sign") && $sign->getX() === $this->config->get("[game2]sign")["x"] && $sign->getY() === $this->config->get("[game2]sign")["y"] && $sign->getZ() === $this->config->get("[game2]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game2]sign")["level"] && $this->config->exists("game2") && !isset($this->players2[$p->getName()])){
+		$sign = $p->getLevel()->getBlock();
+/* will this work? */if($sign instanceof Vector3 && $this->config->exists("[game2]sign") && $sign->getX() === $this->config->get("[game2]sign")["x"] && $sign->getY() === $this->config->get("[game2]sign")["y"] && $sign->getZ() === $this->config->get("[game2]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game2]sign")["level"] && $this->config->exists("game2") && !isset($this->players2[$p->getName()])){
 		$this->addGamePlayer2($p);
 		if(!$this->config->exists("[game2]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
@@ -593,8 +593,8 @@ public function setGame2(PlayerInteractEvent $ev){
 		
 		}else{
 			
-		$sign = $p->getLevel()->getTile($block);
-/* will this work? */if($this->config->exists("[game1]sign") && $sign->getX() === $this->config->get("[game1]sign")["x"] && $sign->getY() === $this->config->get("[game1]sign")["y"] && $sign->getZ() === $this->config->get("[game1]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game1]sign")["level"] && $this->config->exists("game1") && !isset($this->players1[$p->getName()])){
+		$sign = $p->getLevel()->getBlock();
+/* will this work? */if($sign instanceof Vector3 && $this->config->exists("[game1]sign") && $sign->getX() === $this->config->get("[game1]sign")["x"] && $sign->getY() === $this->config->get("[game1]sign")["y"] && $sign->getZ() === $this->config->get("[game1]sign")["z"] && $sign instanceof Sign && $p->getLevel()->getName() === $this->config->get("[game1]sign")["level"] && $this->config->exists("game1") && !isset($this->players1[$p->getName()])){
 		$this->addGamePlayer1($p);
 		if(!$this->config->exists("[game1]waitroom")){
 		$p->sendMessage("Waitroom isnt setup!");
